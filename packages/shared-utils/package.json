@@ -1,0 +1,7 @@
+{
+  "name": "@ocrv2/shared-utils",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {}
+}

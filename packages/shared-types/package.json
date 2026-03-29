@@ -1,0 +1,9 @@
+{
+  "name": "@ocrv2/shared-types",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "dependencies": {
+    "zod": "^3.22.4"
+  }
+}
