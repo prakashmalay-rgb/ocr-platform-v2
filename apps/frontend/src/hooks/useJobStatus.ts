@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
-import { JobStatus, TERMINAL_STATES } from "../../types/job";
-import { JobsService, JobResponse } from "../../../services/api-client/jobs";
+import { JobStatus, TERMINAL_STATES } from "../types/job";
+import { JobsService, JobResponse } from "../services/api-client/jobs";
 
 export function useJobStatus(jobId: string | null, intervalMs: number = 3000) {
   const [job, setJob] = useState<JobResponse | null>(null);

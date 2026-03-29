@@ -1,5 +1,5 @@
-import { UploadsService } from "./uploads";
-import { JobsService } from "./jobs";
+import { UploadsService } from "../../../services/api-client/uploads";
+import { JobsService } from "../../../services/api-client/jobs";
 
 export class UploadOrchestrator {
   static async executeFullFlow(file: File) {
