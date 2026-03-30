@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, JSON, Bool
 from enum import Enum as PyEnum
 from sqlalchemy.types import Enum
 from datetime import datetime
-from app.db.session import Base
+from app.models.base import Base
 
 class JobStatus(str, PyEnum):
     PENDING = "pending"

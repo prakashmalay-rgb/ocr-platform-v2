@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Boolean, DateTime, ForeignKey
 from datetime import datetime
-from app.db.session import Base
+from app.models.base import Base
 
 class Upload(Base):
     __tablename__ = "uploads"

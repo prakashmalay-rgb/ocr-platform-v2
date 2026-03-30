@@ -7,10 +7,10 @@ class StorageService:
     def __init__(self):
         self.s3_client = boto3.client(
             "s3",
-            aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-            aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+            aws_access_key_id=settings.effective_aws_access_key,
+            aws_secret_access_key=settings.effective_aws_secret_key,
             region_name=settings.S3_REGION,
-            endpoint_url=settings.S3_ENDPOINT_URL,
+            endpoint_url=settings.effective_s3_endpoint,
             config=Config(signature_version="s3v4")
         )
 
