@@ -2,6 +2,11 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.api.v1.routes import health, uploads, jobs
 from app.core.config import settings
+from app.db.session import engine, Base
+from app.models import User, Job, Upload, AuditLog  # Register models
+
+# Initialize database tables
+Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
