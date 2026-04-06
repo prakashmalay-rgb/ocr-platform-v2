@@ -8,6 +8,14 @@ class Settings(BaseSettings):
     # DB & Redis
     DATABASE_URL: str = "postgresql+psycopg2://user:password@localhost:5432/ocr_db"
     REDIS_URL: str = "redis://localhost:6379/0"
+
+    @property
+    def REDIS_HOST(self) -> str:
+        return self.REDIS_URL.split("//")[1].split(":")[0]
+
+    @property
+    def REDIS_PORT(self) -> int:
+        return int(self.REDIS_URL.split(":")[2].split("/")[0])
     
     # S3 / Object Storage (Aligned with Render Dashboard)
     S3_BUCKET_NAME: str = "ocr-platform-v2"
@@ -42,6 +50,8 @@ class Settings(BaseSettings):
     
     # Security
     SECRET_KEY: str = "secret-key-to-be-changed"
+    TURNSTILE_SECRET_KEY: Optional[str] = None
+    RESEND_API_KEY: Optional[str] = None
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 7
 

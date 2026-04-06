@@ -11,10 +11,11 @@ async def lifespan(app: FastAPI):
     init_db()
     
     # 2. Lazy Import Routers after DB is ready to prevent circular/order issues
-    from app.api.v1.routes import health, uploads, jobs
+    from app.api.v1.routes import health, uploads, jobs, leads
     app.include_router(health.router, prefix=settings.API_V1_STR, tags=["Health"])
     app.include_router(uploads.router, prefix=f"{settings.API_V1_STR}/uploads", tags=["Uploads"])
     app.include_router(jobs.router, prefix=f"{settings.API_V1_STR}/jobs", tags=["Jobs"])
+    app.include_router(leads.router, prefix=f"{settings.API_V1_STR}/leads", tags=["Leads"])
     
     yield
 

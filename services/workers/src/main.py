@@ -1,18 +1,23 @@
 import os
-from celery import Celery
-
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
-
-# Celery App Initialization
-app = Celery("ocr_workers", broker=REDIS_URL, backend=REDIS_URL)
-
-app.conf.update(
-    task_serializer='json',
-    accept_content=['json'],
-    result_serializer='json',
-    timezone='UTC',
-    enable_utc=True,
-)
-
-# Explicitly discover tasks to avoid circular imports during worker startup
+from arq.connections import RedisSettings
 from .tasks.extraction_task import process_ocr_document
+
+# Redis Configuration
+REDIS_HOST = os.getenv("REDIS_HOST", "localhost")
+REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
+REDIS_DB = int(os.getenv("REDIS_DB", 0))
+
+async def startup(ctx):
+    """Lifecycle hook for worker initialization."""
+    pass
+
+async def shutdown(ctx):
+    """Lifecycle hook for worker cleanup."""
+    pass
+
+class WorkerSettings:
+    """Arq Worker Configuration"""
+    functions = [process_ocr_document]
+    redis_settings = RedisSettings(host=REDIS_HOST, port=REDIS_PORT, database=REDIS_DB)
+    on_startup = startup
+    on_shutdown = shutdown
